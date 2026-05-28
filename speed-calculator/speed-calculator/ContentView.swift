@@ -7,28 +7,76 @@
 
 import SwiftUI
 
+var img: String = "interrogacao"
+var vel: Double = 0
+var corFundo: Color = .gray
+
+func changeImage(tempo: Double, distancia: Double) -> Void {
+    vel = distancia / tempo
+    if(vel <= 9.9){
+        img = "tartaruga"
+        corFundo = .verdeClaro
+        return
+    }
+    if(vel <= 29.9){
+        img = "elefante"
+        corFundo = .azulClaro
+        return
+    }
+    if(vel <= 69.9){
+        img = "avestruz"
+        corFundo = .laranjaClaro
+        return
+    }
+    if(vel <= 89.9){
+        img = "leao"
+        corFundo = .amareloClaro
+        return
+    }
+    img = "guepardo"
+    corFundo = .vermelhoClaro
+}
+
 struct ContentView: View {
-    @State private var imagem: String = "interrogacao"
-    @State private var dist: String = ""
+    @State private var botao = false
+    @State private var dist: Double = 0
     @State private var time: Double = 0
     @State private var cor: Color = .gray
-    @State private var velocidade: Double = 0.0
+    @State private var velocidade: Double = 0
+    @State private var imagem: String = "interrogacao"
     var body: some View {
         ZStack{
             Color(cor)
                 .ignoresSafeArea()
             VStack {
-                Text("Digite adistância (km):")
-                TextField("0", text: $dist)
+                Text("Digite adistâ0cia (km):")
+                TextField("0",value: $dist, format: .number)
+                    .cornerRadius(12)
                     .textFieldStyle(.roundedBorder)
+                    .padding(.horizontal, 70)
                 Text("Digite o tempo (h):")
-                TextField("0", value: $time, format: .number)
+                TextField("0",value: $time, format: .number)
+                    .cornerRadius(12)
                     .textFieldStyle(.roundedBorder)
+                    .padding(.horizontal, 70)
                 Button("Calcular"){
-                    
-                }.buttonStyle(.glass).font(.callout).fontDesign(.monospaced)
-                Text("\(velocidade) km/h").font(.largeTitle)
-                
+                    changeImage(tempo: time, distancia: dist)
+                    imagem = img
+                    velocidade = vel
+                    cor = corFundo
+                }
+                .buttonStyle(.bordered)
+                .background(.black)
+                .foregroundColor(.white)
+                .cornerRadius(100)
+                .font(.callout)
+                .fontDesign(.monospaced)
+                .shadow(color: cor, radius: 15, y: 19)
+                Text("\(velocidade, format: .number.precision(.fractionLength(2))) km/h").font(.largeTitle)
+                Image(imagem)
+                    .resizable()
+                    .clipShape(Circle())
+                    .padding()
                 
                 VStack{
                     HStack{
@@ -40,7 +88,7 @@ struct ContentView: View {
                     HStack{
                         Text("Elefante (10km/h - 29.9km/h)")
                         Circle()
-                            .fill(.blue)
+                            .fill(.azulClaro)
                             .frame(width: 14)
                     }
                     HStack{
@@ -62,8 +110,6 @@ struct ContentView: View {
                             .fill(.vermelhoClaro)
                             .frame(width: 14)
                     }
-                    
-                    
                         
                 }
                 .padding()
