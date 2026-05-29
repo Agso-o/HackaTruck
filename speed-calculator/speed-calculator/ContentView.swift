@@ -81,18 +81,21 @@ struct ContentView: View {
                 VStack{
                     HStack{
                         Text("Tartaruga (0 - 9.9km/h)")
+                        Spacer()
                         Circle()
                             .fill(.verdeClaro)
                             .frame(width: 14)
                     }
                     HStack{
                         Text("Elefante (10km/h - 29.9km/h)")
+                        Spacer()
                         Circle()
                             .fill(.azulClaro)
                             .frame(width: 14)
                     }
                     HStack{
                         Text("Avestruz (30km/h - 69.9km/h)")
+                        Spacer()
                         Circle()
                             .fill(.laranjaClaro)
                             .frame(width: 14)
@@ -100,19 +103,22 @@ struct ContentView: View {
                     
                     HStack{
                         Text("Leao (70km/h - 89.9km/h)")
+                        Spacer()
                         Circle()
                             .fill(.amareloClaro)
                             .frame(width: 14)
                     }
                     HStack{
                         Text("Guepardo (90km/h - 130km/h)")
+                        Spacer()
                         Circle()
                             .fill(.vermelhoClaro)
                             .frame(width: 14)
                     }
                         
                 }
-                .padding()
+                .frame(width: 260, height: 140)
+                .padding(30)
                 .background(.black)
                 .cornerRadius(20)
                 .foregroundColor(.white)
