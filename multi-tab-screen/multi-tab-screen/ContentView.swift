@@ -106,7 +106,7 @@ struct ContentView: View {
                 }
                 Tab("Lista", systemImage: "list.bullet"){
                     ListaView()
-                        .navigationTitle("List")
+                        .navigatwionTitle("List")
                 }
             
             }
