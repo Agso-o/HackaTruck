@@ -8,17 +8,50 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var viewModel = ViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack{
+            ZStack{
+                Color.wine.ignoresSafeArea()
+                VStack{
+                    Image("grifi")
+                        .resizable()
+                        .frame(height: 300)
+                    ScrollView{
+                        ForEach(viewModel.personagens){ personagem in
+                            NavigationLink(destination: PersonagemView(personagem: personagem)) {
+                                HStack{
+                                    if URL(string: personagem.image!) != nil {
+                                        AsyncImage(url: URL(string: personagem.image!)) { image in
+                                            image
+                                                .image?.resizable()
+                                                .scaledToFill()
+                                                .frame(width: 100, height: 100)
+                                                .clipShape(.circle)
+                                        }
+                                        Text(personagem.name!)
+                                            .foregroundColor(.orange)
+                                        Spacer()
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .ignoresSafeArea()
+            .onAppear(){
+                viewModel.fetch()
+            }
         }
-        .padding()
+        
     }
 }
 
 #Preview {
     ContentView()
 }
+

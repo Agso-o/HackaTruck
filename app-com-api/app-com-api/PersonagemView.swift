@@ -8,11 +8,39 @@
 import SwiftUI
 
 struct PersonagemView: View {
+    let personagem: HaPo
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack{
+            Image("grifino")
+                .resizable()
+                .scaledToFill()
+                .blur(radius: 5)
+                .ignoresSafeArea()
+            VStack{
+                if URL(string: personagem.image!) != nil {
+                    AsyncImage(url: URL(string: personagem.image!)) { image in
+                        image
+                            .image?.resizable()
+                            .scaledToFill()
+                            .frame(width: 200, height: 200)
+                            .clipShape(.circle)
+                    }
+                    VStack{
+                        Text("House: \(personagem.house ?? "")")
+                            
+                        Text("Name: \(personagem.name ?? "")")
+                        Text("Birth: \(personagem.dateOfBirth ?? "")")
+                        Text("Eyes: \(personagem.eyeColour ?? "")")
+                    }
+                    .foregroundColor(.white)
+                    .frame(width: 300)
+                    .background(Color.wine)
+                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                    .padding()
+                }
+                
+            }
+            .padding(.bottom, 40)
+        }
     }
-}
-
-#Preview {
-    PersonagemView()
 }
