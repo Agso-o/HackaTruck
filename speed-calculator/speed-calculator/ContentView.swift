@@ -77,6 +77,7 @@ struct ContentView: View {
                     .resizable()
                     .clipShape(Circle())
                     .padding()
+                    
                 
                 VStack{
                     HStack{
